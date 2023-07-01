@@ -14,6 +14,7 @@
       </ul>
     </div>
     <div class="content">
+      <h1>Inventory Management</h1>
       <button @click="showDialog = true">New Structure</button>
 
       <div v-if="showDialog || showNewEquipmentDialog || showOtherInventoryDialog" class="dialog-overlay">

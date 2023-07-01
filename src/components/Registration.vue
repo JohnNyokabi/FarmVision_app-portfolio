@@ -6,12 +6,8 @@
         <form @submit.prevent="submitForm">
           <error v-if="error" :error="error"/>
           <div class="form-group">
-            <label for="firstName">First Name</label>
-            <input type="text" id="firstName" v-model="formData.firstName" required>
-          </div>
-          <div class="form-group">
-            <label for="lastName">Last Name</label>
-            <input type="text" id="lastName" v-model="formData.lastName" required>
+            <label for="firstName">Full Name</label>
+            <input type="text" id="fullName" v-model="formData.fullName" required>
           </div>
           <div class="form-group">
             <label for="email">Email</label>
@@ -40,78 +36,6 @@
           <div class="form-group">
             <label for="farmingType">Farming Type</label>
             <textarea id="farmingType" v-model="formData.farmingType" name="farming_type" required></textarea>
-            <!--<div>
-              <label>
-                <input type="checkbox" v-model="formData.farmingType.livestock" value="Livestock">
-                Livestock
-              </label>
-              <div v-if="formData.farmingType.livestock">
-                <label>
-                  <input type="checkbox" v-model="formData.livestockOptions.dairy" value="Dairy">
-                  Dairy
-                </label>
-                <label>
-                  <input type="checkbox" v-model="formData.livestockOptions.beef" value="Beef">
-                  Beef
-                </label>
-                <label>
-                  <input type="checkbox" v-model="formData.livestockOptions.shoat" value="Shoat">
-                  Shoat
-                </label>
-                <label>
-                  <input type="checkbox" v-model="formData.livestockOptions.broilers" value="Broilers">
-                  Broilers
-                </label>
-                <label>
-                  <input type="checkbox" v-model="formData.livestockOptions.layers" value="Layers">
-                  Layers
-                </label>
-                <label>
-                  <input type="checkbox" v-model="formData.livestockOptions.pig" value="Pig">
-                  Pig
-                </label>
-                <label>
-                  <input type="checkbox" v-model="formData.livestockOptions.rabbit" value="Rabbit">
-                  Rabbit
-                </label>
-                <input type="text" v-model="formData.livestockOptions.otherLivestock" placeholder="Other">
-              </div>
-              <label>
-                <input type="checkbox" v-model="formData.farmingType.crops" value="Crops">
-                Crops
-              </label>
-              <div v-if="formData.farmingType.crops">
-                <label>
-                  <input type="checkbox" v-model="formData.cropOptions.corn" value="Corn">
-                  Corn
-                </label>
-                <label>
-                  <input type="checkbox" v-model="formData.cropOptions.wheat" value="Wheat">
-                  Wheat
-                </label>
-                <label>
-                  <input type="checkbox" v-model="formData.cropOptions.barley" value="Barley">
-                  Barley
-                </label>
-                <label>
-                  <input type="checkbox" v-model="formData.cropOptions.potatoes" value="Potatoes">
-                  Potatoes
-                </label>
-                <label>
-                  <input type="checkbox" v-model="formData.cropOptions.tomatoes" value="Tomatoes">
-                  Tomatoes
-                </label>
-                <label>
-                  <input type="checkbox" v-model="formData.cropOptions.sorghum" value="Sorghum">
-                  Sorghum
-                </label>
-                <label>
-                  <input type="checkbox" v-model="formData.cropOptions.sweetPotatoes" value="Sweet Potatoes">
-                  Sweet Potatoes
-                </label>
-                <input type="text" v-model="formData.cropOptions.otherCrops" placeholder="Other">
-              </div>
-            </div>-->
           </div>
           <button type="submit">Register</button>
         </form>
@@ -123,112 +47,53 @@
 <script>
 import axios from 'axios';
 import Error from './Error.vue';
-import FarmerDetails from '../components/FarmerDetails.vue';
 
 export default {
   name: 'Registration',
   components: {
-    Error,
-    FarmerDetails
+    Error
   },
   data() {
     return {
       formData: {
-        firstName: '',
-        lastName: '',
+        fullName: '',
         email: '',
         country: '',
         identification: '',
         farmName: '',
+        farmLocation: '',
         farmAddress: '',
-        farmingType: '',
-        /*{
-          livestock: false,
-          crops: false
-        },
-        livestockOptions: {
-          dairy: false,
-          beef: false,
-          shoat: false,
-          broilers: false,
-          layers: false,
-          pig: false,
-          rabbit: false,
-          otherLivestock: ''
-        },
-        cropOptions: {
-          corn: false,
-          wheat: false,
-          barley: false,
-          potatoes: false,
-          tomatoes: false,
-          sorghum: false,
-          sweetPotatoes: false,
-          otherCrops: ''
-        },*/
-        error: ''
+        farmingType: ''
       },
-      farmers: []
+      error: ''
     };
   },
   methods: {
     async submitForm() {
-      /*const selectedLivestock = {};
-      Object.entries(this.formData.livestockOptions).forEach(([key, value]) => {
-        if (value) {
-          selectedLivestock[key] = value;
-        }
-      });
-
-      const selectedCrops = {};
-      Object.entries(this.formData.cropOptions).forEach(([key, value]) => {
-        if (value) {
-          selectedCrops[key] = value;
-        }
-      });*/
-
       const payload = {
-        first_name: this.formData.firstName,
-        last_name: this.formData.lastName,
+        full_name: this.formData.fullName,
         email: this.formData.email,
         country: this.formData.country,
         identification: this.formData.identification,
         farm_name: this.formData.farmName,
+        farm_location: this.formData.farmLocation,
         farm_address: this.formData.farmAddress,
         farming_type: this.formData.farmingType,
-        //livestock_options: this.formData.livestockOptions,
-        //crop_options: this.formData.cropOptions,
-        //livestock_options: selectedLivestock,
-        //crop_options: selectedCrops,
       };
 
       try {
         const response = await axios.post('http://localhost:5001/farmers', payload);
         console.log('Response from backend:', response.data);
 
-        // Add the captured form data to the farmers array
-        this.farmers.push(response.data);
-
-        console.log('Form data from registrationVue:', response.data);
-
         this.$router.push({
-          name: 'FarmManagement',
-          params: { farmers: JSON.stringify([response.data]) },
+          name: 'farmerDetails',
+          props: { farmer: response.data },
         });
       } catch (error) {
         this.error = 'An error occurred!';
       }
-
-      /*try {
-        const response = await axios.post('http://localhost:5001/farmers', payload);
-        console.log('Response from backend:', response.data);
-        
-        this.$router.push('/FarmManagement')
-      } catch (error) {
-        this.error = 'An error occurred!';
-      }*/
     }
-  }
+  },
 };
 </script>
 

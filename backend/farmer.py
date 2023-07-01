@@ -19,8 +19,7 @@ db = SQLAlchemy(app)
 # User model
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(50), nullable=False)
-    last_name = db.Column(db.String(50), nullable=False)
+    full_name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
 
@@ -32,6 +31,7 @@ class Farmer(db.Model):
     country = db.Column(db.String(50), nullable=False)
     identification = db.Column(db.String(50), nullable=False)
     farm_name = db.Column(db.String(100), nullable=False)
+    farm_location = db.Column(db.String(50), nullable=False)
     farm_address = db.Column(db.Text, nullable=False)
     farming_type = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -53,6 +53,7 @@ def create_farmer():
     farm_name = data.get('farm_name')
     if farm_name is None:
         return jsonify({'message': 'Farm name is required'}), 400
+    farm_location = data.get('farm_location')
     
     farm_address = data.get('farm_address')
 
@@ -82,6 +83,7 @@ def create_farmer():
         country=country,
         identification=identification,
         farm_name=farm_name,
+        farm_location = farm_location,
         farm_address=farm_address,
         farming_type=farming_type
     )
@@ -103,6 +105,7 @@ def get_farmer(farmer_id):
         'country': farmer.country,
         'identification': farmer.identification,
         'farmName': farmer.farm_name,
+        'farmLocation': farmer.farm_location,
         'farmAddress': farmer.farm_address,
         'farmingType': farmer.farm_type,
         'createdAt': farmer.created_at,
@@ -122,12 +125,14 @@ def update_farmer(farmer_id):
     country = data.get('country')
     identification = data.get('identification')
     farm_name = data.get('farm_name')
+    farm_location = data.get('farm_location')
     farm_address = data.get('farmAddress')
     farming_type = data.get('farmingType')
 
     farmer.country = country
     farmer.identification = identification
     farmer.farm_name = farm_name
+    farmer.farm_location = farm_location
     farmer.farm_address = farm_address
     farmer.farming_type = farming_type
 

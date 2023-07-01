@@ -34,7 +34,6 @@ export default {
 }
 
 body {
-  /*background-color: #c7d6eb;*/
   min-height: 100vh;
   display: flex;
   background: linear-gradient(to bottom,#FBAE21, #FF00FF, #35A2CB, #80F4FF,  #4E1F3C);
@@ -50,23 +49,12 @@ h1, h2, h3, h4, h5, h6, label, span {
   font-family: 'Fira Sans', sans-serif;
 }
 
-/*body, html, #app, #root, .auth-wrapper {
-  width: 100%;
-  height: 100%;
-}*/
-
 #app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
 }
-
-/*.navbar-light {
-  background-color: rgb(197, 169, 223);
-  box-shadow: 8px 14px 80px rgba(34, 35, 58, 0.2);
-  height: 35px;
-}*/
 
 .auth-wrapper {
   display: flex;

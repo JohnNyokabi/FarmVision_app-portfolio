@@ -13,22 +13,22 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView
-  },
-  {
-    path: '/FarmManagement/:farmers',
-    name: 'FarmManagement',
-    component: FarmManagement,
-    props: true,
   },    
-  /*{
+  {
     path: '/FarmManagement',
     name: 'farmManagement',
     component: () => import('../views/FarmManagement.vue')
-  },*/
+  },
   {
     path: '/Registration',
     name: 'registration',
     component: () => import('../components/Registration.vue')
+  },
+  {
+    path: '/FarmerDetails',
+    name: 'farmerDetails',
+    component: () => import ('../components/FarmerDetails'),
+    props: (route) => ({ farmer: route.params.farmer })
   },
   {
     path: '/CropManagement',

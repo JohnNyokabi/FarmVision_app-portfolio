@@ -1,10 +1,10 @@
 <template>
-  <div class="table">
+  <div class="table" v-if="farmer">
+    <h2>Farmer Details</h2>
     <table>
       <thead>
         <tr>
-          <th>firstName</th>
-          <th>lastName</th>
+          <th>Full Name</th>
           <th>Email</th>
           <th>Country</th>
           <th>Identification</th>
@@ -15,8 +15,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="farmer in farmers" :key="farmer.id">
-          <td>{{ farmer.firstName }} {{ farmer.lastName }}</td>
+        <tr>
+          <td>{{ farmer.fullName }}</td>
           <td>{{ farmer.email }}</td>
           <td>{{ farmer.country }}</td>
           <td>{{ farmer.identification }}</td>
@@ -32,10 +32,13 @@
 
 <script>
 export default {
-  name: 'FarmDetails',
-  props: ['farmers'],
-  created() {
-    console.log('Farmers prop from farmerdetails:', this.farmers);
+  name: 'FarmerDetails',
+  props: {
+    farmer: {
+      type: Object,
+      required: true,
+      default: () => ({}),
+    },
   },
 };
 </script>

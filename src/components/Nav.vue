@@ -18,6 +18,9 @@
             <div>
               <router-link to="/InventoryManagement">Inventory Management</router-link>
             </div>
+            <div>
+              <router-link to="/FarmDetails">Farm Details</router-link>
+            </div>
           </ul>
         </div>
 

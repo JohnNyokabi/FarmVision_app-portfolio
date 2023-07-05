@@ -437,7 +437,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .farm-inventory {
   display: flex;
 }

@@ -46,6 +46,11 @@ const routes = [
     component: () => import('../components/InventoryManagement.vue')
   },
   {
+    path: '/ToDo_list',
+    name: 'todo',
+    component: () => import('../components/ToDo_list.vue')
+  },
+  {
     path: '/MarketTrends',
     name: 'MarketTrends',
     component: MarketTrends

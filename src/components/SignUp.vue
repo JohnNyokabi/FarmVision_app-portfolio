@@ -34,7 +34,6 @@
 
         <button class="btn btn-primary btn-block">Sign Up</button>
       </form>
-
     </div>
   </div>
 </template>

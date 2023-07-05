@@ -410,7 +410,7 @@
                 <th>Day</th>
                 <th>Date</th>
                 <th>Time</th>
-                <th>Descriptions</th>
+                <th>Details</th>
               </tr>
             </thead>
             <tbody>
@@ -464,8 +464,8 @@
                   <input v-else type="time" v-model="location.time">
                 </td>
                 <td>
-                  <span v-if="!location.isEditing">{{ location.descriptions }}</span>
-                  <textarea v-else type="text" v-model="location.descriptions"></textarea>
+                  <span v-if="!location.isEditing">{{ location.details }}</span>
+                  <textarea v-else type="text" v-model="location.details"></textarea>
                 </td>
                 <td>
                   <button v-if="!location.isEditing" @click="editLocation(location)">Edit</button>
@@ -491,18 +491,18 @@ export default {
       showNewProductDialog: false,
       showProductTable: false,
       newProduct: {
-        productId: '',
-        productName: '',
-        productType: '',
-        amount: '',
-        measurementUnit: '',
-        retailPrice: '',
-        wholesalePrice: '',
-        status: '',
+        productId: "",
+        productName: "",
+        productType: "",
+        amount: "",
+        measurementUnit: "",
+        retailPrice: "",
+        wholesalePrice: "",
+        status: "",
         delivery: false,
         pickup: false,
         shipped: false,
-        description: '',
+        description: "",
       },
       products: [],
       showOrderDialog: false,
@@ -533,7 +533,7 @@ export default {
         day: "",
         date: "",
         time: "",
-        descriptions: ""
+        details: ""
       },
       locations: [],
     }
@@ -607,7 +607,7 @@ export default {
         day: "",
         date: "",
         time: "",
-        descriptions: ""
+        details: ""
       };
     },
     cancelCreateProduct() {

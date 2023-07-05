@@ -21,6 +21,9 @@
             <div>
               <router-link to="/FarmDetails">Farm Details</router-link>
             </div>
+            <div>
+              <router-link to="/ToDo_list">Planned Activities</router-link>
+            </div>
           </ul>
         </div>
 
